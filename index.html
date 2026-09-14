@@ -2,10 +2,796 @@
 <html lang="cs">
 <head>
   <meta charset="UTF-8">
-  <title>Dnes hory</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="description"
+    content="DNES HORY — ručně vyráběná česká keramika pro lyžaře, skialpinisty a běžkaře. První dárková edice přichází brzy."
+  >
+
+  <title>DNES HORY — česká keramika pro lidi, kteří vědí, kde je jim dobře</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    :root {
+      --bg: #f7f5f0;
+      --text: #111111;
+      --muted: #6d6a64;
+      --line: rgba(17, 17, 17, 0.12);
+      --max: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Manrope", Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .wrap {
+      width: min(calc(100% - 40px), var(--max));
+      margin: 0 auto;
+    }
+
+    header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      padding: 28px 0;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .nav-link {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      border-color: currentColor;
+    }
+
+    .hero {
+      min-height: 100vh;
+      min-height: 100svh;
+      display: grid;
+      align-items: end;
+      position: relative;
+      overflow: hidden;
+      padding: 130px 0 56px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          circle at 72% 32%,
+          rgba(0, 0, 0, 0.035),
+          transparent 30%
+        ),
+        linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.32),
+          rgba(255, 255, 255, 0)
+        );
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      gap: 56px;
+      align-items: end;
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 850px;
+      font-size: clamp(48px, 7.3vw, 104px);
+      line-height: 0.95;
+      font-weight: 500;
+      letter-spacing: -0.055em;
+    }
+
+    .hero-copy {
+      max-width: 470px;
+      margin: 28px 0 0;
+      font-size: clamp(18px, 2vw, 24px);
+      line-height: 1.35;
+      color: #242321;
+    }
+
+    .hero-side {
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 18px;
+    }
+
+    .photo-placeholder {
+      min-height: 520px;
+      border: 1px solid var(--line);
+      background: #eeeae2;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 32px;
+    }
+
+    .photo-placeholder span {
+      max-width: 270px;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #77736c;
+    }
+
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      font-size: 12px;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    section {
+      padding: 120px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-label {
+      margin: 0 0 36px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .edition-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--text);
+      border-bottom: 1px solid var(--text);
+    }
+
+    .edition-item {
+      min-height: 260px;
+      padding: 34px 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .edition-item + .edition-item {
+      border-left: 1px solid var(--text);
+    }
+
+    .edition-no {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .edition-name {
+      font-size: clamp(31px, 3.3vw, 48px);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      font-weight: 500;
+    }
+
+    .lead {
+      max-width: 760px;
+      margin: 44px 0 0;
+      font-size: clamp(22px, 3vw, 38px);
+      line-height: 1.22;
+      letter-spacing: -0.03em;
+      font-weight: 500;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+
+    .feature {
+      background: var(--bg);
+      padding: 34px 28px 42px;
+      min-height: 210px;
+    }
+
+    .feature h3 {
+      margin: 0 0 58px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .feature p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 24ch;
+      font-size: 14px;
+    }
+
+    .gift {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      align-items: center;
+    }
+
+    .gift-placeholder {
+      aspect-ratio: 4 / 3;
+      border: 1px solid var(--line);
+      background: #eeeae2;
+      display: grid;
+      place-items: center;
+      padding: 32px;
+      text-align: center;
+    }
+
+    .gift-placeholder span {
+      max-width: 250px;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #77736c;
+    }
+
+    .gift h2,
+    .notify h2 {
+      margin: 0;
+      font-size: clamp(40px, 5vw, 72px);
+      line-height: 1;
+      font-weight: 500;
+      letter-spacing: -0.045em;
+    }
+
+    .gift p {
+      margin: 26px 0 0;
+      max-width: 510px;
+      font-size: 19px;
+      color: #32302d;
+    }
+
+    .notify {
+      text-align: center;
+      padding-top: 140px;
+      padding-bottom: 140px;
+    }
+
+    .notify p {
+      max-width: 650px;
+      margin: 24px auto 36px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .notify-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 56px;
+      padding: 0 28px;
+      border: 1px solid var(--text);
+      background: var(--text);
+      color: white;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .notify-button:hover {
+      background: transparent;
+      color: var(--text);
+    }
+
+    .form-wrap {
+      max-width: 640px;
+      margin: 34px auto 0;
+      display: none;
+      text-align: left;
+    }
+
+    .form-wrap.open {
+      display: block;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 10px;
+    }
+
+    input {
+      width: 100%;
+      min-height: 54px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.6);
+      color: var(--text);
+      padding: 0 16px;
+      font: inherit;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: var(--text);
+    }
+
+    .submit {
+      min-height: 54px;
+      border: 1px solid var(--text);
+      background: var(--text);
+      color: white;
+      padding: 0 20px;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .form-note {
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .form-message {
+      margin-top: 16px;
+      font-size: 14px;
+      display: none;
+    }
+
+    footer {
+      padding: 30px 0 34px;
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        min-height: auto;
+        padding-top: 140px;
+      }
+
+      .hero-grid,
+      .gift {
+        grid-template-columns: 1fr;
+      }
+
+      .photo-placeholder {
+        min-height: 430px;
+      }
+
+      .features {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .edition-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .edition-item + .edition-item {
+        border-left: 0;
+        border-top: 1px solid var(--text);
+      }
+
+      .edition-item {
+        min-height: 180px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .wrap {
+        width: min(calc(100% - 28px), var(--max));
+      }
+
+      header {
+        padding-top: 22px;
+      }
+
+      .hero {
+        padding-bottom: 34px;
+      }
+
+      h1 {
+        font-size: clamp(48px, 16vw, 72px);
+      }
+
+      section {
+        padding: 84px 0;
+      }
+
+      .photo-placeholder {
+        min-height: 330px;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .feature {
+        min-height: auto;
+      }
+
+      .feature h3 {
+        margin-bottom: 34px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .status-row,
+      .footer-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .notify {
+        text-align: left;
+      }
+
+      .notify p {
+        margin-left: 0;
+      }
+
+      .form-wrap {
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Dnes hory</h1>
-  <p>Web se připravuje.</p>
+
+  <header>
+    <div class="wrap nav">
+      <a href="#top" class="brand">DNES HORY</a>
+      <a href="#prvni-edice" class="nav-link">První edice</a>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <section class="hero">
+      <div class="wrap hero-grid">
+
+        <div>
+          <p class="eyebrow">Česká keramika · první edice</p>
+
+          <h1>
+            Dárek pro lidi, kteří vědí, kde je jim dobře.
+          </h1>
+
+          <p class="hero-copy">
+            Tři ručně vyráběné hrnky pro dny na lyžích, skialpech a běžkách.
+            V dárkové krabičce. Bez zbytečností.
+          </p>
+        </div>
+
+        <div class="hero-side">
+
+          <div class="photo-placeholder">
+            <span>
+              Sem přijde hlavní fotografie krabičky se třemi hrnky
+            </span>
+          </div>
+
+          <div class="status-row">
+            <span>První edice</span>
+            <span>Brzy v prodeji</span>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section id="prvni-edice">
+
+      <div class="wrap">
+
+        <p class="section-label">
+          01 · První edice
+        </p>
+
+        <div class="edition-grid">
+
+          <article class="edition-item">
+            <span class="edition-no">01</span>
+            <div class="edition-name">
+              DNES<br>LYŽE.
+            </div>
+          </article>
+
+          <article class="edition-item">
+            <span class="edition-no">02</span>
+            <div class="edition-name">
+              DNES<br>SKIALPY.
+            </div>
+          </article>
+
+          <article class="edition-item">
+            <span class="edition-no">03</span>
+            <div class="edition-name">
+              DNES<br>BĚŽKY.
+            </div>
+          </article>
+
+        </div>
+
+        <p class="lead">
+          Tři hrnky pro tři způsoby, jak strávit dobrý den.
+        </p>
+
+      </div>
+
+    </section>
+
+    <section>
+
+      <div class="wrap">
+
+        <p class="section-label">
+          02 · Jak vznikají
+        </p>
+
+        <div class="features">
+
+          <div class="feature">
+            <h3>Česká keramika</h3>
+            <p>
+              Vyrobeno u nás. Poctivý materiál a žádná anonymní velkovýroba.
+            </p>
+          </div>
+
+          <div class="feature">
+            <h3>Ruční výroba</h3>
+            <p>
+              Každý kus vzniká rukama. Drobné rozdíly jsou součástí jeho charakteru.
+            </p>
+          </div>
+
+          <div class="feature">
+            <h3>Vtlačený nápis</h3>
+            <p>
+              Nápis není potisk. Je vtlačený přímo do materiálu hrnku.
+            </p>
+          </div>
+
+          <div class="feature">
+            <h3>Dárkové balení</h3>
+            <p>
+              Trojice hrnků přijde v krabičce, kterou není potřeba dál schovávat.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <section>
+
+      <div class="wrap gift">
+
+        <div class="gift-placeholder">
+          <span>
+            Sem později přijde detail krabičky, hrnků nebo struktury keramiky
+          </span>
+        </div>
+
+        <div>
+
+          <p class="section-label">
+            03 · Pro koho
+          </p>
+
+          <h2>
+            Pro lidi, kteří jsou nejradši v horách.
+          </h2>
+
+          <p>
+            Pro lyžaře. Pro skialpinisty. Pro běžkaře.
+            Pro ty, kteří mají rádi věci s jednoduchým nápadem
+            a ještě jednodušším provedením.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="notify" id="kontakt">
+
+      <div class="wrap">
+
+        <p class="section-label">
+          04 · Brzy v prodeji
+        </p>
+
+        <h2>
+          První edice přichází brzy.
+        </h2>
+
+        <p>
+          Nech nám kontakt a dáme ti vědět,
+          až budou první krabičky připravené.
+        </p>
+
+        <button
+          class="notify-button"
+          id="openForm"
+          type="button"
+        >
+          Chci vědět, až bude
+        </button>
+
+        <div
+          class="form-wrap"
+          id="formWrap"
+        >
+
+          <form id="notifyForm">
+
+            <div class="form-grid">
+
+              <input
+                type="text"
+                name="name"
+                placeholder="Jméno"
+                autocomplete="name"
+                required
+              >
+
+              <input
+                type="email"
+                name="email"
+                placeholder="E-mail"
+                autocomplete="email"
+                required
+              >
+
+              <button
+                class="submit"
+                type="submit"
+              >
+                Odeslat
+              </button>
+
+            </div>
+
+            <div class="form-note">
+              Formulář zatím slouží jako vizuální ukázka.
+              Před spuštěním prodeje ho napojíme na skutečný sběr kontaktů.
+            </div>
+
+            <div
+              class="form-message"
+              id="formMessage"
+            >
+              Díky. Tohle zatím jen testujeme —
+              skutečné odesílání zapojíme v dalším kroku.
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+
+    <div class="wrap footer-row">
+      <span>DNES HORY</span>
+      <span>dneshory.cz</span>
+    </div>
+
+  </footer>
+
+  <script>
+    const openForm = document.getElementById("openForm");
+    const formWrap = document.getElementById("formWrap");
+    const notifyForm = document.getElementById("notifyForm");
+    const formMessage = document.getElementById("formMessage");
+
+    openForm.addEventListener("click", () => {
+      formWrap.classList.add("open");
+      openForm.style.display = "none";
+      formWrap.querySelector("input").focus();
+    });
+
+    notifyForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      formMessage.style.display = "block";
+      notifyForm.reset();
+    });
+  </script>
+
 </body>
 </html>
